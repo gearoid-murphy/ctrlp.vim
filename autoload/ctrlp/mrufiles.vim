@@ -30,6 +30,23 @@ endf
 
 fu! s:mergelists()
 	let diskmrufs = ctrlp#utils#readfile(ctrlp#mrufiles#cachefile())
+
+	let pattern = '/home/gmurphy/Builds/Checkouts/test/[a-zA-Z0-9_\-]'
+	let root = matchstr(getcwd(), pattern)
+	let dict = {}
+	let deduped = []
+	echom root
+	for path in diskmrufs
+		if(!empty(root))
+			let path = substitute(path, pattern, root, "")
+		endif
+		if(has_key(dict, path) == 0)
+			let dict[path] = 1
+			call add(deduped, path)
+		endif
+	endfor
+	let diskmrufs = deduped
+
 	cal filter(diskmrufs, 'index(s:mrufs, v:val) < 0')
 	let mrufs = s:mrufs + diskmrufs
 	retu s:chop(mrufs)
