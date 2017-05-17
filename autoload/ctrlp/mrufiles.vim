@@ -35,7 +35,6 @@ fu! s:mergelists()
 	let root = matchstr(getcwd(), pattern)
 	let dict = {}
 	let deduped = []
-	echom root
 	for path in diskmrufs
 		if(!empty(root))
 			let path = substitute(path, pattern, root, "")
