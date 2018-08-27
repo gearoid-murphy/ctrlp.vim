@@ -31,7 +31,7 @@ endf
 fu! s:mergelists()
 	let diskmrufs = ctrlp#utils#readfile(ctrlp#mrufiles#cachefile())
 
-	let pattern = '/home/gmurphy/Builds/Checkouts/test/[a-zA-Z0-9_\-]\+'
+	let pattern = '/google/src/cloud/murphyg/[a-zA-Z0-9_\-]\+'
 	let root = matchstr(getcwd(), pattern)
 	let dict = {}
 	let deduped = []
